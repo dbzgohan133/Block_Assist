@@ -174,3 +174,28 @@ echo "deb [signed-by=/usr/share/keyrings/cudnn-local-4EC753EA-keyring.gpg] file:
 sudo apt update
 sudo apt install -y libcudnn9 libcudnn9-dev
 ```
+
+# If Instance Crashing
+```
+# 2.1 Make sure broken episodes can’t crash the trainer
+rm -rf data/evaluation/*            # wipe any old junk
+mkdir -p data/evaluation            # folder must exist
+
+# 2.2 Supply a WRITE-scoped Hugging Face token
+echo 'HF_TOKEN=hf_your_write_token_here' > .env
+grep HF_TOKEN .env                  # should print the token line
+
+```
+
+# Environment prep (your usual five lines)
+```
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+```
+
+# Launch BlockAssist
+```
+python run.py
+```
